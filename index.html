@@ -2,33 +2,131 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>AR Pyramid</title>
+    <title>Ancient Egypt VR World</title>
 
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+    <style>
+        body{
+            margin:0;
+            overflow:hidden;
+        }
+    </style>
 </head>
+<body>
 
-<body style="margin:0; overflow:hidden;">
+<a-scene>
 
-<a-scene
-    embedded
-    arjs="sourceType: webcam;">
+    <!-- Sky -->
+    <a-sky color="#F4C76B"></a-sky>
 
-    <a-marker preset="hiro">
+    <!-- Sun -->
+    <a-sphere
+        position="0 40 -80"
+        radius="8"
+        color="#FFD700"
+        emissive="#FFD700">
+    </a-sphere>
 
-        <a-cone
-            position="0 1 0"
-            radius-bottom="1"
-            radius-top="0"
-            height="2"
-            segments-radial="4"
-            color="#FFD700"
-            animation="property: rotation; to: 0 360 0; loop: true; dur: 5000">
-        </a-cone>
+    <!-- Desert Ground -->
+    <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="500"
+        height="500"
+        color="#D2B48C">
+    </a-plane>
 
-    </a-marker>
+    <!-- Main Pyramid -->
+    <a-cone
+        position="0 15 -50"
+        radius-bottom="20"
+        radius-top="0"
+        height="30"
+        segments-radial="4"
+        color="#C2A06D">
+    </a-cone>
 
-    <a-entity camera></a-entity>
+    <!-- Left Pyramid -->
+    <a-cone
+        position="-40 10 -80"
+        radius-bottom="15"
+        radius-top="0"
+        height="20"
+        segments-radial="4"
+        color="#B89560">
+    </a-cone>
+
+    <!-- Right Pyramid -->
+    <a-cone
+        position="40 12 -90"
+        radius-bottom="17"
+        radius-top="0"
+        height="24"
+        segments-radial="4"
+        color="#C8A56A">
+    </a-cone>
+
+    <!-- Temple Entrance -->
+    <a-box
+        position="0 3 -15"
+        width="15"
+        height="6"
+        depth="8"
+        color="#8B7355">
+    </a-box>
+
+    <!-- Columns -->
+    <a-cylinder position="-10 4 -15" radius="1" height="8" color="#D8C090"></a-cylinder>
+    <a-cylinder position="-5 4 -15" radius="1" height="8" color="#D8C090"></a-cylinder>
+    <a-cylinder position="5 4 -15" radius="1" height="8" color="#D8C090"></a-cylinder>
+    <a-cylinder position="10 4 -15" radius="1" height="8" color="#D8C090"></a-cylinder>
+
+    <!-- Sphinx -->
+    <a-box
+        position="20 2 -25"
+        width="6"
+        height="3"
+        depth="12"
+        color="#A98C5E">
+    </a-box>
+
+    <a-sphere
+        position="20 4 -20"
+        radius="2"
+        color="#A98C5E">
+    </a-sphere>
+
+    <!-- Torches -->
+    <a-cylinder position="-8 2 -10" radius="0.2" height="4" color="#5C4033"></a-cylinder>
+    <a-sphere position="-8 4.5 -10" radius="0.5" color="orange"
+              animation="property: scale; to:1.2 1.2 1.2; dir:alternate; loop:true; dur:500">
+    </a-sphere>
+
+    <a-cylinder position="8 2 -10" radius="0.2" height="4" color="#5C4033"></a-cylinder>
+    <a-sphere position="8 4.5 -10" radius="0.5" color="orange"
+              animation="property: scale; to:1.2 1.2 1.2; dir:alternate; loop:true; dur:500">
+    </a-sphere>
+
+    <!-- Desert Rocks -->
+    <a-sphere position="-30 1 -30" radius="2" color="#8C7853"></a-sphere>
+    <a-sphere position="30 1 -40" radius="3" color="#8C7853"></a-sphere>
+    <a-sphere position="-50 1 -60" radius="2.5" color="#8C7853"></a-sphere>
+
+    <!-- Lighting -->
+    <a-light type="ambient" color="#ffffff" intensity="1"></a-light>
+    <a-light type="directional"
+             position="10 20 10"
+             intensity="1.5">
+    </a-light>
+
+    <!-- Camera -->
+    <a-entity
+        position="0 1.6 10"
+        movement-controls
+        look-controls>
+        <a-camera></a-camera>
+    </a-entity>
 
 </a-scene>
 
