@@ -1,132 +1,169 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Ancient Egypt VR World</title>
+  <meta charset="utf-8" />
+  <title>Ancient Egypt VR</title>
 
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <style>
-        body{
-            margin:0;
-            overflow:hidden;
-        }
-    </style>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-family: Arial, sans-serif;
+      background: rgba(0,0,0,0.5);
+      padding: 10px 15px;
+      border-radius: 10px;
+      z-index: 999;
+    }
+  </style>
 </head>
+
 <body>
+
+<div class="overlay">
+  Move phone to look around • Tap and drag to rotate
+</div>
 
 <a-scene>
 
-    <!-- Sky -->
-    <a-sky color="#F4C76B"></a-sky>
+  <a-assets>
 
-    <!-- Sun -->
-    <a-sphere
-        position="0 40 -80"
-        radius="8"
-        color="#FFD700"
-        emissive="#FFD700">
-    </a-sphere>
+    <img id="sky" src="texture/desert sky.jpg">
+    <img id="sand" src="texture/sand.jpg">
 
-    <!-- Desert Ground -->
-    <a-plane
-        position="0 0 0"
-        rotation="-90 0 0"
-        width="500"
-        height="500"
-        color="#D2B48C">
-    </a-plane>
+    <!-- <audio id="ambience"
+           src="audio/desert_ambience.mp3">
+    </audio> -->
 
-    <!-- Main Pyramid -->
-    <a-cone
-        position="0 15 -50"
-        radius-bottom="20"
-        radius-top="0"
-        height="30"
-        segments-radial="4"
-        color="#C2A06D">
-    </a-cone>
+  </a-assets>
 
-    <!-- Left Pyramid -->
-    <a-cone
-        position="-40 10 -80"
-        radius-bottom="15"
-        radius-top="0"
-        height="20"
-        segments-radial="4"
-        color="#B89560">
-    </a-cone>
+  <!-- Desert Sky -->
+  <a-sky src="#sky"></a-sky>
 
-    <!-- Right Pyramid -->
-    <a-cone
-        position="40 12 -90"
-        radius-bottom="17"
-        radius-top="0"
-        height="24"
-        segments-radial="4"
-        color="#C8A56A">
-    </a-cone>
+  <!-- Ambient Audio -->
+  <a-sound
+      src="#ambience"
+      autoplay="true"
+      loop="true"
+      volume="1">
+  </a-sound>
 
-    <!-- Temple Entrance -->
-    <a-box
-        position="0 3 -15"
-        width="15"
-        height="6"
-        depth="8"
-        color="#8B7355">
-    </a-box>
+  <!-- Ground -->
+  <a-plane
+      position="0 0 0"
+      rotation="-90 0 0"
+      width="1000"
+      height="1000"
+      material="src:#sand; repeat:100 100">
+  </a-plane>
 
-    <!-- Columns -->
-    <a-cylinder position="-10 4 -15" radius="1" height="8" color="#D8C090"></a-cylinder>
-    <a-cylinder position="-5 4 -15" radius="1" height="8" color="#D8C090"></a-cylinder>
-    <a-cylinder position="5 4 -15" radius="1" height="8" color="#D8C090"></a-cylinder>
-    <a-cylinder position="10 4 -15" radius="1" height="8" color="#D8C090"></a-cylinder>
+  <!-- Main Pyramid -->
+  <a-entity
+      gltf-model="assets/pyramid.glb"
+      position="0 0 -100"
+      scale="15 15 15">
+  </a-entity>
 
-    <!-- Sphinx -->
-    <a-box
-        position="20 2 -25"
-        width="6"
-        height="3"
-        depth="12"
-        color="#A98C5E">
-    </a-box>
+  <!-- Sphinx -->
+  <a-entity
+      gltf-model="assets/Anubis.glb"
+      position="30 0 -60"
+      scale="5 5 5">
+  </a-entity>
 
-    <a-sphere
-        position="20 4 -20"
-        radius="2"
-        color="#A98C5E">
-    </a-sphere>
+  <!-- Temple -->
+  <!-- <a-entity
+      gltf-model="assets/temple.glb"
+      position="-50 0 -80"
+      scale="8 8 8">
+  </a-entity> -->
 
-    <!-- Torches -->
-    <a-cylinder position="-8 2 -10" radius="0.2" height="4" color="#5C4033"></a-cylinder>
-    <a-sphere position="-8 4.5 -10" radius="0.5" color="orange"
-              animation="property: scale; to:1.2 1.2 1.2; dir:alternate; loop:true; dur:500">
-    </a-sphere>
+  <!-- Obelisk 1 -->
+  <!-- <a-entity
+      gltf-model="assets/obelisk.glb"
+      position="-20 0 -30"
+      scale="3 3 3">
+  </a-entity> -->
 
-    <a-cylinder position="8 2 -10" radius="0.2" height="4" color="#5C4033"></a-cylinder>
-    <a-sphere position="8 4.5 -10" radius="0.5" color="orange"
-              animation="property: scale; to:1.2 1.2 1.2; dir:alternate; loop:true; dur:500">
-    </a-sphere>
+  <!-- Obelisk 2 -->
+  <!-- <a-entity
+      gltf-model="assets/obelisk.glb"
+      position="20 0 -30"
+      scale="3 3 3">
+  </a-entity> -->
 
-    <!-- Desert Rocks -->
-    <a-sphere position="-30 1 -30" radius="2" color="#8C7853"></a-sphere>
-    <a-sphere position="30 1 -40" radius="3" color="#8C7853"></a-sphere>
-    <a-sphere position="-50 1 -60" radius="2.5" color="#8C7853"></a-sphere>
+  <!-- Sun -->
+  <a-light
+      type="directional"
+      intensity="1.8"
+      position="50 100 50">
+  </a-light>
 
-    <!-- Lighting -->
-    <a-light type="ambient" color="#ffffff" intensity="1"></a-light>
-    <a-light type="directional"
-             position="10 20 10"
-             intensity="1.5">
-    </a-light>
+  <a-light
+      type="ambient"
+      intensity="0.6">
+  </a-light>
 
-    <!-- Camera -->
-    <a-entity
-        position="0 1.6 10"
-        movement-controls
-        look-controls>
-        <a-camera></a-camera>
-    </a-entity>
+  <!-- Torches -->
+  <a-cylinder
+      position="-10 2 -20"
+      radius="0.15"
+      height="4"
+      color="#5e3c1b">
+  </a-cylinder>
+
+  <a-sphere
+      position="-10 4.5 -20"
+      radius="0.5"
+      color="#ff9900"
+      animation="property: scale;
+                 to:1.3 1.3 1.3;
+                 dir:alternate;
+                 loop:true;
+                 dur:400">
+  </a-sphere>
+
+  <a-cylinder
+      position="10 2 -20"
+      radius="0.15"
+      height="4"
+      color="#5e3c1b">
+  </a-cylinder>
+
+  <a-sphere
+      position="10 4.5 -20"
+      radius="0.5"
+      color="#ff9900"
+      animation="property: scale;
+                 to:1.3 1.3 1.3;
+                 dir:alternate;
+                 loop:true;
+                 dur:400">
+  </a-sphere>
+
+  <!-- Fog -->
+  <a-entity
+      fog="type: exponential;
+           color: #f4c97a;
+           density: 0.01">
+  </a-entity>
+
+  <!-- Camera -->
+  <a-entity
+      position="0 1.6 10"
+      look-controls
+      wasd-controls>
+      <a-camera></a-camera>
+  </a-entity>
 
 </a-scene>
 
